@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
+    @IBOutlet weak var restartButton: UIButton!
     
     // TODO Step 5: Initialise instance variables here
     var topButtonLabel : String = "I'm the Top"
@@ -42,10 +43,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startStory()
+        updateUI()
+    }
+    
+    func startStory() {
         topButtonLabel = answer1a
         bottomButtonLabel = answer1b
         storyTextView.text = story1
-        updateUI()
+        
+        topButton.isHidden = false
+        bottomButton.isHidden = false
+        restartButton.isHidden = true
     }
     
     func updateUI() {
@@ -53,8 +62,21 @@ class ViewController: UIViewController {
         bottomButton.setTitle(bottomButtonLabel, for: .normal)
     }
 
+    @IBAction func restart(_ sender: UIButton) {
+        startStory()
+        updateUI()
+    }
+    
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        func endOfStory() {
+            topButton.isHidden = true
+            bottomButton.isHidden = true
+            restartButton.isHidden = false
+            
+            storyProgress = 1
+        }
     
         func firstScene() {
             if sender.tag == 1 {
@@ -90,9 +112,7 @@ class ViewController: UIViewController {
                 storyProgress = 4
                 storyTextView.text = story4
                 
-                topButton.isHidden = true
-                bottomButton.isHidden = true
-                
+                endOfStory()
                 updateUI()
             }
         }
@@ -102,18 +122,14 @@ class ViewController: UIViewController {
                 storyProgress = 6
                 storyTextView.text = story6
                 
-                topButton.isHidden = true
-                bottomButton.isHidden = true
-                
+                endOfStory()
                 updateUI()
             }
             else {
                 storyProgress = 5
                 storyTextView.text = story5
                 
-                topButton.isHidden = true
-                bottomButton.isHidden = true
-                
+                endOfStory()
                 updateUI()
             }
         }
