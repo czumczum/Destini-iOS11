@@ -35,27 +35,97 @@ class ViewController: UIViewController {
     @IBOutlet weak var storyTextView: UILabel!
     
     // TODO Step 5: Initialise instance variables here
-    
-    
-    
+    var topButtonLabel : String = "I'm the Top"
+    var bottomButtonLabel : String = "I'm the bottom"
+    var storyProgress : Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // TODO Step 3: Set the text for the storyTextView, topButton, bottomButton, and to T1_Story, T1_Ans1, and T1_Ans2
-        
+        topButtonLabel = answer1a
+        bottomButtonLabel = answer1b
+        storyTextView.text = story1
+        updateUI()
+    }
+    
+    func updateUI() {
+        topButton.setTitle(topButtonLabel, for: .normal)
+        bottomButton.setTitle(bottomButtonLabel, for: .normal)
     }
 
-    
     // User presses one of the buttons
     @IBAction func buttonPressed(_ sender: UIButton) {
     
-        // TODO Step 4: Write an IF-Statement to update the views
+        func firstScene() {
+            if sender.tag == 1 {
+                    storyProgress = 3
                 
-        // TODO Step 6: Modify the IF-Statement to complete the story
+                topButtonLabel = answer3a
+                bottomButtonLabel = answer3b
+                storyTextView.text = story3
+                
+                updateUI()
+            }
+            else {
+                storyProgress = 2
+                topButtonLabel = answer2a
+                bottomButtonLabel = answer2b
+                storyTextView.text = story2
+                
+                updateUI()
+            }
+        }
         
-    
+        func secondScene() {
+            if sender.tag == 1 {
+                storyProgress = 3
+                
+                topButtonLabel = answer3a
+                bottomButtonLabel = answer3b
+                storyTextView.text = story3
+                
+                updateUI()
+            }
+            else {
+                storyProgress = 4
+                storyTextView.text = story4
+                
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                
+                updateUI()
+            }
+        }
+        
+        func thirdScene() {
+            if sender.tag == 1 {
+                storyProgress = 6
+                storyTextView.text = story6
+                
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                
+                updateUI()
+            }
+            else {
+                storyProgress = 5
+                storyTextView.text = story5
+                
+                topButton.isHidden = true
+                bottomButton.isHidden = true
+                
+                updateUI()
+            }
+        }
+        
+        switch storyProgress {
+        case 1: firstScene()
+        case 2: secondScene()
+        case 3: thirdScene()
+        default:
+            print("Something goes wrong")
+        }
+        
     }
     
 
